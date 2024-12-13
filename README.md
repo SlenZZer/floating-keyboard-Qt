@@ -1,14 +1,14 @@
 # floating-keyboard-Qt
 
 ## Overview
-This project provides a customizable floating keyboard widget using Qt. The keyboard can be dynamically resized, repositioned, and interacts seamlessly with either `QLineEdit` or `QTextEdit` objects for text input.
+This project provides a custom, minimalist floating keyboard widget using Qt. Designed by Ansul Yadav, it includes essential features for easy integration into applications. This draggable, resizable keyboard allows seamless interaction with `QLineEdit` or `QTextEdit` objects for text input.
 
 ## Features
-- Resizable keyboard with proportional button dimensions.
 - Draggable interface for easy repositioning.
-- Dynamically updates text in linked `QLineEdit` or `QTextEdit` objects.
-- Configurable layout with support for special keys like Enter, Space, and Clear.
-- Middle-of-the-screen positioning on launch.
+- Real-time text display for live feedback.
+- Configurable initial string for editing.
+- Resizable keyboard layout (in-progress).
+- Minimalistic design with required keys only.
 
 ## Minimum Requirements
 - **Operating System**: Windows, macOS, or Linux.
@@ -28,16 +28,13 @@ This project provides a customizable floating keyboard widget using Qt. The keyb
    - Include `FloatingKeyboard.h` and `FloatingKeyboard.cpp` in your project.
    - Create an instance of `FloatingKeyboard`:
      ```cpp
-     QString textBuffer;
-     QLineEdit *lineEdit = new QLineEdit;
-     FloatingKeyboard *keyboard = new FloatingKeyboard(textBuffer, lineEdit);
+     QTextEdit *textEdit = new QTextEdit;
+     FloatingKeyboard *keyboard = new FloatingKeyboard(textEdit);
      ```
-   - Show the keyboard when needed:
+   - Show the keyboard with an initial string:
      ```cpp
-     keyboard->showKeyboard();
+     keyboard->showKeyboard("Initial text");
      ```
-4. **Link Text Objects**:
-   - Pass a pointer to either `QLineEdit` or `QTextEdit` for automatic text updates on pressing Enter.
 
 ## Customization
 - Modify the `keys` array in `FloatingKeyboard.cpp` to change the keyboard layout.
@@ -50,5 +47,4 @@ This project provides a customizable floating keyboard widget using Qt. The keyb
 
 ## License
 This project is open-source. Modify and use it as needed in your applications.
-
 
