@@ -3,15 +3,16 @@
 
 #include <QObject>
 #include <QGridLayout>
-#include <QSignalMapper>
 #include <QPushButton>
 #include <QDebug>
 #include <QWidget>
 #include <QMouseEvent>
 #include <QLineEdit>
 #include <QApplication>
-#include <QDesktopWidget>
 #include <QTextEdit>
+#include <QScreen>
+#include <QPointer>
+#include <QVector>
 
 
 //! Developed By: Ansul Yadav
@@ -25,10 +26,11 @@ class FloatingKeyboard : public QWidget
 {
     Q_OBJECT
 public:
-    explicit FloatingKeyboard(void *textObject, QWidget *parent = nullptr);
+    explicit FloatingKeyboard(QWidget *targetWidget, QWidget *parent = nullptr);
 
     // function to Show keyBoard with some initial string to edit
-    void showKeyboard(QString str);
+    void showKeyboard(const QString &str);
+    void setTargetWidget(QWidget *targetWidget);
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
@@ -40,12 +42,14 @@ private slots:
 
 private:
     QGridLayout *keyboardLayout;
-    QSignalMapper *signalMapper; // to map signals from all the Buttons to their respective strings
     QPoint dragStartPosition;
     QLineEdit *displayLineEdit;  // LineEdit to show real time input of keyBoard
-    void *textObjRef;
+    QPointer<QWidget> targetWidgetRef;
+    QVector<QPushButton *> alphaButtons;
+    bool shiftEnabled = false;
     const int layoutWidth = 10; // Fixed grid width
     const int layoutHeight = 5; // Fixed grid height
+    void updateAlphaKeys();
 };
 
 #endif // FLOATINGKEYBOARD_H
