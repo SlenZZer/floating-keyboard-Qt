@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <floatingkeyboard.h>
+#include <QEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,16 +16,14 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    QString txt;
     ~MainWindow();
-
-signals:
-    void showKboard(QString str);
-    void hideKboard();
+protected:
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private slots:
-    void on_lineEdit_selectionChanged();
+    void on_pushButton_clicked();
 private:
     Ui::MainWindow *ui;
+    FloatingKeyboard *keyboard;
 };
 #endif // MAINWINDOW_H
