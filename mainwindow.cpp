@@ -22,8 +22,7 @@ MainWindow::~MainWindow()
 
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
-    if (watched == ui->lineEdit &&
-        (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::FocusIn)) {
+    if (watched == ui->lineEdit && event->type() == QEvent::MouseButtonPress) {
         keyboard->setTargetWidget(ui->lineEdit);
         keyboard->showKeyboard(ui->lineEdit->text());
         return false;
